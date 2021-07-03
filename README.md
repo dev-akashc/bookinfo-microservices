@@ -1,5 +1,9 @@
-# Bookinfo
+# Bookinfo Sample for Tekton/Argo
 
-**Bookinfo Sample**   
+## Manifests Repository
+Original Contents  
+See <https://gitlab.com/cloudnative_impress/bookinfo-manifests>.  
 
-See https://istio.io/docs/examples/bookinfo/
+## Original Source by Istio
+
+Original Source See <https://istio.io/docs/examples/bookinfo/>.  
