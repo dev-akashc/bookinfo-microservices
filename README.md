@@ -15,21 +15,6 @@ The application consists of the following microservices:
 - Reviews: Provides book reviews and interacts with the Ratings service.
 - Ratings: Provides star ratings for a book.
 
-Architecture diagram (textual representation):
-
-                +----------------+
-                |  Product Page  |
-                +--------+-------+
-                         |
-         +---------------+---------------+
-         |                               |
-+-----v-----+                   +-----v-----+
-|  Details  |                   |  Reviews  |
-+-----------+                   +-----+-----+
-|
-+-----v-----+
-|  Ratings   |
-+-----------+
 
 ## Tech Stack
 
