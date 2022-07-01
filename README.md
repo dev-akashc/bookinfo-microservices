@@ -1,6 +1,4 @@
-# Bookinfo Microservices
 
-This is a cloud-native microservices demo application built using Istio and Kubernetes. It demonstrates how to deploy and manage a sample book catalog system using service mesh capabilities such as traffic control, observability, and security.
 
 ## Overview
 
