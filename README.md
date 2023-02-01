@@ -1,5 +1,4 @@
 
-
 ## Overview
 
 The Bookinfo application simulates an online bookstore. It displays information about books, including descriptions, reviews, and ratings. Each part of the application is implemented as a separate microservice to demonstrate real-world microservices architecture and Istio features.
@@ -52,6 +51,8 @@ kubectl apply -f bookinfo.yaml
 kubectl get pods
 kubectl get services
 
+
+
 ## Deployment
 
 To expose the application using an Istio Gateway:
@@ -74,3 +75,6 @@ http://<INGRESS-IP>:<PORT>/productpage
 - Distributed tracing with Jaeger or Zipkin
 - Secure service-to-service communication with mTLS
 - Ideal for learning Kubernetes, Istio, and microservices patterns
+
+
+
