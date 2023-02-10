@@ -134,14 +134,14 @@ def logout():
 async def getProductReviewsIgnoreResponse(product_id, headers):
     getProductReviews(product_id, headers)
 
-# flood reviews with unnecessary requests to demonstrate Istio rate limiting, asynchoronously
+# flood reviews with unnecessary requests to demonstrate Aakash rate limiting, asynchoronously
 
 
 async def floodReviewsAsynchronously(product_id, headers):
     # the response is disregarded
     await asyncio.gather(*(getProductReviewsIgnoreResponse(product_id, headers) for _ in range(flood_factor)))
 
-# flood reviews with unnecessary requests to demonstrate Istio rate limiting
+# flood reviews with unnecessary requests to demonstrate Aakash rate limiting
 
 
 def floodReviews(product_id, headers):

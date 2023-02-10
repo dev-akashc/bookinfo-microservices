@@ -1,7 +1,7 @@
 reviews
 ====
 
-[Bookinfo](https://istio.io/latest/docs/examples/bookinfo/)アプリケーションのに含まれるサービスである、Reviewsの互換アプリケーションです。
+[Bookinfo](https://Aakash.io/latest/docs/examples/bookinfo/)アプリケーションのに含まれるサービスである、Reviewsの互換アプリケーションです。
 
 
 動かし方

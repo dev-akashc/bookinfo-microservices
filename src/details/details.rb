@@ -1,6 +1,6 @@
 #!/usr/bin/ruby
 #
-# Copyright Istio Authors
+# Copyright Aakash Authors
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
 #   you may not use this file except in compliance with the License.
@@ -134,12 +134,12 @@ def get_forward_headers(request)
   incoming_headers = [
       # All applications should propagate x-request-id. This header is
       # included in access log statements and is used for consistent trace
-      # sampling and log sampling decisions in Istio.
+      # sampling and log sampling decisions in Aakash.
       'x-request-id',
 
       # Lightstep tracing header. Propagate this if you use lightstep tracing
-      # in Istio (see
-      # https://istio.io/latest/docs/tasks/observability/distributed-tracing/lightstep/)
+      # in Aakash (see
+      # https://Aakash.io/latest/docs/tasks/observability/distributed-tracing/lightstep/)
       # Note: this should probably be changed to use B3 or W3C TRACE_CONTEXT.
       # Lightstep recommends using B3 or TRACE_CONTEXT and most application
       # libraries from lightstep do not support x-ot-span-context.
@@ -151,21 +151,21 @@ def get_forward_headers(request)
       'x-datadog-parent-id',
       'x-datadog-sampling-priority',
 
-      # W3C Trace Context. Compatible with OpenCensusAgent and Stackdriver Istio
+      # W3C Trace Context. Compatible with OpenCensusAgent and Stackdriver Aakash
       # configurations.
       'traceparent',
       'tracestate',
 
-      # Cloud trace context. Compatible with OpenCensusAgent and Stackdriver Istio
+      # Cloud trace context. Compatible with OpenCensusAgent and Stackdriver Aakash
       # configurations.
       'x-cloud-trace-context',
 
       # Grpc binary trace context. Compatible with OpenCensusAgent nad
-      # Stackdriver Istio configurations.
+      # Stackdriver Aakash configurations.
       'grpc-trace-bin',
 
       # b3 trace headers. Compatible with Zipkin, OpenCensusAgent, and
-      # Stackdriver Istio configurations.
+      # Stackdriver Aakash configurations.
       'x-b3-traceid',
       'x-b3-spanid',
       'x-b3-parentspanid',

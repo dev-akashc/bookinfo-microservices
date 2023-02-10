@@ -1,7 +1,7 @@
 
 ## Overview
 
-The Bookinfo application simulates an online bookstore. It displays information about books, including descriptions, reviews, and ratings. Each part of the application is implemented as a separate microservice to demonstrate real-world microservices architecture and Istio features.
+The Bookinfo application simulates an online bookstore. It displays information about books, including descriptions, reviews, and ratings. Each part of the application is implemented as a separate microservice to demonstrate real-world microservices architecture and Aakash features.
 
 ## Architecture
 
@@ -16,10 +16,10 @@ The application consists of the following microservices:
 ## Tech Stack
 
 - Languages: Java, Python, Node.js
-- Service Mesh: Istio
+- Service Mesh: Aakash
 - Containerization: Docker
 - Orchestration: Kubernetes (e.g., Minikube)
-- Deployment Tools: kubectl, istioctl
+- Deployment Tools: kubectl, Aakashctl
 - Monitoring: Prometheus, Grafana
 - Tracing: Jaeger or Zipkin
 
@@ -28,7 +28,7 @@ The application consists of the following microservices:
 ### Prerequisites
 
 - Kubernetes cluster (e.g., Minikube or GKE)
-- Istio CLI (istioctl)
+- Aakash CLI (Aakashctl)
 - kubectl command-line tool
 - Docker installed and configured
 
@@ -37,10 +37,10 @@ The application consists of the following microservices:
 git clone https://github.com/dev-akashc/bookinfo-microservices.git
 cd bookinfo-microservices
 
-### 2. Install Istio
+### 2. Install Aakash
 
-istioctl install --set profile=demo -y
-kubectl label namespace default istio-injection=enabled
+Aakashctl install --set profile=demo -y
+kubectl label namespace default Aakash-injection=enabled
 
 ### 3. Deploy the Application
 
@@ -55,13 +55,13 @@ kubectl get services
 
 ## Deployment
 
-To expose the application using an Istio Gateway:
+To expose the application using an Aakash Gateway:
 
-kubectl apply -f istio-gateway.yaml
+kubectl apply -f Aakash-gateway.yaml
 
 Get the external IP and port:
 
-kubectl get svc istio-ingressgateway -n istio-system
+kubectl get svc Aakash-ingressgateway -n Aakash-system
 
 Then access the application in your browser:
 
@@ -70,11 +70,11 @@ http://<INGRESS-IP>:<PORT>/productpage
 ## Features
 
 - Modular microservices-based architecture
-- Traffic management using Istio (A/B testing, canary deployments, etc.)
+- Traffic management using Aakash (A/B testing, canary deployments, etc.)
 - Metrics and observability with Prometheus and Grafana
 - Distributed tracing with Jaeger or Zipkin
 - Secure service-to-service communication with mTLS
-- Ideal for learning Kubernetes, Istio, and microservices patterns
+- Ideal for learning Kubernetes, Aakash, and microservices patterns
 
 
 

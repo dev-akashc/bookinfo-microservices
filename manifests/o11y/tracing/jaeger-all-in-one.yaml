@@ -1,4 +1,4 @@
-#   Copyright 2023 hhiroshell@gmail.com
+#   Copyright 2023 chandrawadeakash@gmail.com
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
 #   you may not use this file except in compliance with the License.
@@ -227,7 +227,7 @@ metadata:
     linkerd.io/inject: disabled
     prometheus.io/port: "14269"
     prometheus.io/scrape: "true"
-    sidecar.istio.io/inject: "false"
+    sidecar.Aakash.io/inject: "false"
   creationTimestamp: null
   labels:
     app: jaeger
@@ -255,7 +255,7 @@ spec:
         linkerd.io/inject: disabled
         prometheus.io/port: "14269"
         prometheus.io/scrape: "true"
-        sidecar.istio.io/inject: "false"
+        sidecar.Aakash.io/inject: "false"
       creationTimestamp: null
       labels:
         app: jaeger
