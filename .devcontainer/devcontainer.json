@@ -1,0 +1,14 @@
+{
+  "name": "reviews",
+
+  "image": "ubuntu:jammy",
+
+  "features": {
+    "ghcr.io/devcontainers-contrib/features/tomcat-sdkman:2": {},
+    "ghcr.io/devcontainers/features/docker-in-docker:2": {},
+  },
+
+  "postCreateCommand": "chmod +x $SDKMAN_DIR/candidates/tomcat/current/bin/*.sh",
+
+  "postAttachCommand": "docker run -d --name reviews-db -e MYSQL_ROOT_PASSWORD=password -v $(pwd)/hack/mysql:/docker-entrypoint-initdb.d:ro -p 3306:3306 mysql:8.0",
+}
