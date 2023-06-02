@@ -7,7 +7,7 @@ import jakarta.persistence.Persistence;
 import jakarta.persistence.PersistenceContext;
 import jakarta.transaction.Transactional;
 
-import java.util.List;
+import java.util.*;
 
 
 @ApplicationScoped
