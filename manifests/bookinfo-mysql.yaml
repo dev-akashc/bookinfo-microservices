@@ -11,72 +11,71 @@
 #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
-
-##################################################################################################
-# Mysql db services
-# credentials: root/password
-##################################################################################################
-
-apiVersion: v1
-kind: Secret
-metadata:
-  name: mysql-credentials
-type: Opaque
-data:
-  rootpasswd: cGFzc3dvcmQ=
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: mysqldb
+  name: reviews-db-v1
+  namespace: bookinfo
   labels:
-    app: mysqldb
-    service: mysqldb
+    app: reviews-db
+    version: v1
 spec:
   ports:
   - port: 3306
     name: tcp
   selector:
-    app: mysqldb
+    app: reviews-db
+    version: v1
 ---
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
-  name: mysqldb-v1
+  name: reviews-db-v1
+  namespace: bookinfo
   labels:
-    app: mysqldb
+    app: reviews-db
     version: v1
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: mysqldb
+      app: reviews-db
       version: v1
+  serviceName: reviews-db-v1
   template:
     metadata:
       labels:
-        app: mysqldb
+        app: reviews-db
         version: v1
     spec:
       containers:
-      - name: mysqldb
-        image: registry.gitlab.com/cloudnative_impress/bookinfo-microservices/mysqldb:latest
+      - name: mysql
+        image: mysql:8.0.33
         imagePullPolicy: IfNotPresent
+        args:
+        - "--default-authentication-plugin"
+        - "mysql_native_password"
         ports:
         - containerPort: 3306
         env:
-          - name: MYSQL_ROOT_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: mysql-credentials
-                key: rootpasswd
-        args: ["--default-authentication-plugin","mysql_native_password"]
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: reviews-db-credentials
+              key: rootpasswd
         volumeMounts:
         - name: var-lib-mysql
           mountPath: /var/lib/mysql
-      volumes:
-      - name: var-lib-mysql
-        emptyDir: {}
-      imagePullSecrets:
-      - name: gitlab-cloudnative-microservices
----
+        - name: initdb
+          mountPath: /docker-entrypoint-initdb.d
+  volumeClaimTemplates:
+  - metadata:
+      name: var-lib-mysql
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      storageClassName: gp2
+      resources:
+        requests:
+          storage: 1Gi
