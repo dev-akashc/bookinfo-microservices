@@ -10,5 +10,9 @@
     "ghcr.io/devcontainers-contrib/features/tomcat-sdkman:2": {},
   },
 
-  "postCreateCommand": "chmod +x $SDKMAN_DIR/candidates/tomcat/current/bin/*.sh",
+  "postCreateCommand": "apt update && apt install -y dnsutils && chmod +x $SDKMAN_DIR/candidates/tomcat/current/bin/*.sh",
+
+  "containerEnv": {
+    "WORKSPACE_FOLDER": "/workspaces/bookinfo-microservices",
+  },
 }
