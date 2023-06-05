@@ -16,13 +16,14 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: bookinfo
+  namespace: bookinfo
   annotations:
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
 spec:
   ingressClassName: alb
   rules:
-  - host: bookinfo.sandbox.test
+  - host: bookinfo.sandbox.eks
     http:
       paths:
       - path: /productpage
