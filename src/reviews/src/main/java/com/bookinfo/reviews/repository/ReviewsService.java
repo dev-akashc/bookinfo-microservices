@@ -6,4 +6,5 @@ public interface ReviewsService {
 
    public List<ReviewEntity> findReviews(int productId);
 
+   public void addReviews(List<ReviewEntity> reviewEntities);
 }
