@@ -5,6 +5,12 @@ public class Review {
     private String text;
     private Rating rating;
 
+    public Review(String reviewer, String text, Rating rating) {
+        this.reviewer = reviewer;
+        this.text = text;
+        this.rating = rating;
+    }
+
     public Rating getRating() {
         return rating;
     }
@@ -13,20 +19,8 @@ public class Review {
         return reviewer;
     }
 
-    public void setReviewer(String reviewer) {
-        this.reviewer = reviewer;
-    }
-
     public String getText() {
         return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public void setRating(Rating rating) {
-        this.rating = rating;
     }
 
 }

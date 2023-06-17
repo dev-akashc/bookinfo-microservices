@@ -9,15 +9,17 @@ import jakarta.transaction.Transactional;
 
 import java.util.*;
 
+import com.bookinfo.reviews.repository.ReviewsService;
+
 
 @ApplicationScoped
 @Transactional
-public class ReviewService {
+public class ReviewsServiceImpl implements ReviewsService{
 
     @PersistenceContext
     private EntityManager em;
 
-    public ReviewService() {
+    public ReviewsServiceImpl() {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("ReviewService");
         this.em = emf.createEntityManager();
     }

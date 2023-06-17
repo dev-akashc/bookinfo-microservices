@@ -1,7 +1,8 @@
 package com.bookinfo.reviews.api;
 
 import com.bookinfo.reviews.repository.ReviewEntity;
-import com.bookinfo.reviews.repository.ReviewService;
+import com.bookinfo.reviews.repository.ReviewsService;
+import com.bookinfo.reviews.repository.ReviewsServiceImpl;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
@@ -23,27 +24,17 @@ public class Endpoints {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Reviews getReview(@PathParam("productId") int productId) {
-        Reviews reviews = new Reviews();
-        reviews.setId(productId);
-
-        ReviewService reviewService = new ReviewService();
+        ReviewsService reviewService = new ReviewsServiceImpl();
         List<ReviewEntity> reviewEntities = reviewService.findReviews(productId);
 
         List<Review> reviewList = new ArrayList<>();
         for (ReviewEntity reviewEntity: reviewEntities) {
-            Review review = new Review();
-            review.setReviewer(reviewEntity.getReviewer());
-            review.setText(reviewEntity.getText());
-
-            Rating rating = new Rating();
-            rating.setStars(reviewEntity.getStars());
-            rating.setColor(reviewEntity.getColor());
-            review.setRating(rating);
-
+            Rating rating = new Rating(reviewEntity.getStars(), reviewEntity.getColor());
+            Review review = new Review(reviewEntity.getReviewer(), reviewEntity.getText(), rating);
             reviewList.add(review);
         }
-        reviews.setReviews(reviewList);
 
+        Reviews reviews = new Reviews(productId, reviewList);
         return reviews;
     }
 }

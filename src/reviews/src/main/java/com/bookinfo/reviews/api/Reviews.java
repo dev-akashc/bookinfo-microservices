@@ -6,19 +6,17 @@ public class Reviews {
     private int id;
     List<Review> reviews;
 
-    public int getId() {
-        return id;
+    public Reviews(int id, List<Review> reviews) {
+        this.id = id;
+        this.reviews = reviews;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getId() {
+        return id;
     }
 
     public List<Review> getReviews() {
         return reviews;
     }
 
-    public void setReviews(List<Review> reviews) {
-        this.reviews = reviews;
-    }
 }
