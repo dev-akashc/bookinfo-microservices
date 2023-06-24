@@ -1,7 +1,5 @@
 package com.bookinfo.reviews.repository;
 
-import com.bookinfo.reviews.repository.ReviewsService;
-
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -13,13 +11,13 @@ import java.util.*;
 
 @ApplicationScoped
 @Transactional
-public class ReviewsServiceImpl implements ReviewsService{
+public class ReviewsServiceImpl implements ReviewsService {
 
     @PersistenceContext
     private EntityManager em;
 
     public ReviewsServiceImpl() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ReviewService");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ReviewsService");
         this.em = emf.createEntityManager();
     }
 

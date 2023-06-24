@@ -26,9 +26,6 @@ public class ReviewEntity implements Serializable {
     @Column(name = "stars")
     private int stars;
 
-    @Column(name = "color")
-    private String color;
-
     public int getId() {
         return id;
     }
@@ -67,13 +64,5 @@ public class ReviewEntity implements Serializable {
 
     public void setStars(int stars) {
         this.stars = stars;
-    }
-
-    public String getColor() {
-        return color;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
     }
 }

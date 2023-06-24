@@ -38,7 +38,7 @@ public class Endpoints {
 
         List<Review> reviewList = new ArrayList<>();
         for (ReviewEntity reviewEntity: reviewEntities) {
-            Rating rating = new Rating(reviewEntity.getStars(), reviewEntity.getColor());
+            Rating rating = new Rating(reviewEntity.getStars());
             Review review = new Review(reviewEntity.getReviewer(), reviewEntity.getText(), rating);
             reviewList.add(review);
         }
@@ -61,7 +61,6 @@ public class Endpoints {
             entity.setReviewer(review.getReviewer());
             entity.setText(review.getText());
             entity.setStars(review.getRating().getStars());
-            entity.setColor(review.getRating().getColor());
             reviewEntities.add(entity);
         }
 

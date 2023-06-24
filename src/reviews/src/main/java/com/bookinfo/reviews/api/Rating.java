@@ -5,14 +5,10 @@ import jakarta.json.bind.annotation.JsonbProperty;
 
 public class Rating {
     private int stars;
-    private String color;
 
     @JsonbCreator
-    public Rating(
-            @JsonbProperty("stars") int stars,
-            @JsonbProperty("color") String color) {
+    public Rating(@JsonbProperty("stars") int stars) {
         this.stars = stars;
-        this.color = color;
     }
 
     public int getStars() {
@@ -20,7 +16,7 @@ public class Rating {
     }
 
     public String getColor() {
-        return color;
+        return "black";
     }
 
 }
