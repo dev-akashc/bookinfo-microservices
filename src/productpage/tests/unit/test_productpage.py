@@ -69,7 +69,7 @@ class ApplianceTest(unittest.TestCase):
             'x-b3-spanid': '30c7fdf104e3de66',
             'x-b3-sampled': '1'
         }
-        m.get("http://ratings:9080/ratings/%d" % product_id, text='{}',
+        m.get("http://reviews:9080/reviews/ratings/%d" % product_id, text='{}',
               request_headers=expected_headers)
 
         uri = "/api/v1/products/%d/ratings" % product_id

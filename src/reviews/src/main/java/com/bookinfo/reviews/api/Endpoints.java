@@ -38,13 +38,31 @@ public class Endpoints {
 
         List<Review> reviewList = new ArrayList<>();
         for (ReviewEntity reviewEntity: reviewEntities) {
-            Rating rating = new Rating(reviewEntity.getStars());
-            Review review = new Review(reviewEntity.getReviewer(), reviewEntity.getText(), rating);
+            Review review = new Review(reviewEntity.getReviewer(), reviewEntity.getText());
             reviewList.add(review);
         }
 
         Reviews reviews = new Reviews(productId, reviewList);
         return reviews;
+    }
+
+    /**
+     * @return Reviews that will be returned as a application/json response.
+     */
+    @GET
+    @Path("/ratings/{productId}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Ratings getRatings(@PathParam("productId") int productId) {
+        List<ReviewEntity> reviewEntities = reviewsService.findReviews(productId);
+
+        List<Rating> ratingList = new ArrayList<>();
+        for (ReviewEntity reviewEntity: reviewEntities) {
+            Rating rating = new Rating(reviewEntity.getReviewer(), reviewEntity.getStars());
+            ratingList.add(rating);
+        }
+
+        Ratings ratings = new Ratings(productId, ratingList);
+        return ratings;
     }
 
     /**
@@ -67,4 +85,5 @@ public class Endpoints {
         reviewsService.addReviews(reviewEntities);
         return reviews;
     }
+
 }

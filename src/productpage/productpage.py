@@ -59,7 +59,6 @@ Bootstrap(app)
 
 servicesDomain = "" if (os.environ.get("SERVICES_DOMAIN") is None) else "." + os.environ.get("SERVICES_DOMAIN")
 detailsHostname = "details" if (os.environ.get("DETAILS_HOSTNAME") is None) else os.environ.get("DETAILS_HOSTNAME")
-ratingsHostname = "ratings" if (os.environ.get("RATINGS_HOSTNAME") is None) else os.environ.get("RATINGS_HOSTNAME")
 reviewsHostname = "reviews" if (os.environ.get("REVIEWS_HOSTNAME") is None) else os.environ.get("REVIEWS_HOSTNAME")
 
 flood_factor = 0 if (os.environ.get("FLOOD_FACTOR") is None) else int(os.environ.get("FLOOD_FACTOR"))
@@ -71,8 +70,8 @@ details = {
 }
 
 ratings = {
-    "name": "http://{0}{1}:9080".format(ratingsHostname, servicesDomain),
-    "endpoint": "ratings",
+    "name": "http://{0}{1}:9080".format(reviewsHostname, servicesDomain),
+    "endpoint": "reviews/ratings",
     "children": []
 }
 
@@ -307,13 +306,15 @@ def front():
         floodReviews(product_id, headers)
 
     reviewsStatus, reviews = getProductReviews(product_id, headers)
+    ratingsStatus, ratings = getProductRatings(product_id, headers)
     return render_template(
         'productpage.html',
         detailsStatus=detailsStatus,
         reviewsStatus=reviewsStatus,
+        ratingsStatus=ratingsStatus,
         product=product,
         details=details,
-        reviews=reviews,
+        reviews=zip(reviews["reviews"],ratings["ratings"]),
         user=user)
 
 

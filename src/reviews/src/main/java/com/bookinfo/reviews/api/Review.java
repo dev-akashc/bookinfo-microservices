@@ -8,6 +8,13 @@ public class Review {
     private String text;
     private Rating rating;
 
+    public Review(
+            @JsonbProperty("reviewer") String reviewer,
+            @JsonbProperty("text") String text) {
+        this.reviewer = reviewer;
+        this.text = text;
+    }
+
     @JsonbCreator
     public Review(
             @JsonbProperty("reviewer") String reviewer,

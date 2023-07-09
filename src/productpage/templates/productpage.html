@@ -125,24 +125,24 @@
     <div class="col-md-6">
       {% if reviewsStatus == 200: %}
       <h4 class="text-center text-primary">Book Reviews</h4>
-      {% for review in reviews.reviews %}
+      {% for review,rating in reviews %}
       <blockquote>
         <p>{{ review.text }}</p>
         <small>{{ review.reviewer }}</small>
-        {% if review.rating: %}
-        {% if review.rating.stars: %}
-        <font color="{{ review.rating.color }}">
+        {% if rating: %}
+        {% if rating.stars: %}
+        <font color="{{ rating.color }}">
           <!-- full stars: -->
-          {% for n in range(review.rating.stars) %}
+          {% for n in range(rating.stars) %}
           <span class="glyphicon glyphicon-star"></span>
           {% endfor %}
           <!-- empty stars: -->
-          {% for n in range(5 - review.rating.stars) %}
+          {% for n in range(5 - rating.stars) %}
           <span class="glyphicon glyphicon-star-empty"></span>
           {% endfor %}
         </font>
-        {% elif review.rating.error: %}
-        <p><i>{{ review.rating.error }}</i></p>
+        {% elif rating.error: %}
+        <p><i>{{ rating.error }}</i></p>
         {% endif %}
         {% endif %}
       </blockquote>
