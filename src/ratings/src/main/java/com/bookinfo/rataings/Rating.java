@@ -12,11 +12,16 @@ public class Rating {
         this.stars = stars;
     }
 
+    public String getReviewer() {
+        return reviewer;
+    }
+
     public int getStars() {
         return stars;
     }
 
-    public String getReviewer() {
-        return reviewer;
+    public String getColor() {
+        return "red";
     }
+
 }
