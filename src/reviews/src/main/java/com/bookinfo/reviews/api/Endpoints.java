@@ -1,18 +1,15 @@
 package com.bookinfo.reviews.api;
 
-import com.bookinfo.reviews.repository.ReviewEntity;
-import com.bookinfo.reviews.repository.ReviewsService;
 import com.bookinfo.reviews.repository.ReviewsServiceImpl;
 
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
+import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,59 +28,50 @@ public class Endpoints {
      * @return Reviews that will be returned as a application/json response.
      */
     @GET
-    @Path("/{productId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Reviews getReviews(@PathParam("productId") int productId) {
-        List<ReviewEntity> reviewEntities = reviewsService.findReviews(productId);
-
-        List<Review> reviewList = new ArrayList<>();
-        for (ReviewEntity reviewEntity: reviewEntities) {
-            Review review = new Review(reviewEntity.getReviewer(), reviewEntity.getText());
-            reviewList.add(review);
-        }
-
-        Reviews reviews = new Reviews(productId, reviewList);
-        return reviews;
+    public List<Review> getReviews(@QueryParam("productId") int productId) {
+        return reviewsService.findReviews(productId);
     }
 
     /**
      * @return Reviews that will be returned as a application/json response.
      */
     @GET
-    @Path("/ratings/{productId}")
+    @Path("/ratings")
     @Produces(MediaType.APPLICATION_JSON)
-    public Ratings getRatings(@PathParam("productId") int productId) {
-        List<ReviewEntity> reviewEntities = reviewsService.findReviews(productId);
-
-        List<Rating> ratingList = new ArrayList<>();
-        for (ReviewEntity reviewEntity: reviewEntities) {
-            Rating rating = new Rating(reviewEntity.getReviewer(), reviewEntity.getStars());
-            ratingList.add(rating);
-        }
-
-        Ratings ratings = new Ratings(productId, ratingList);
-        return ratings;
+    public List<Rating> getRatings(@QueryParam("productId") int productId) {
+        return reviewsService.findRatings(productId);
+    }
+    
+    /**
+     * @return Reviews that has been created by the request.
+     */
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Review putReview(Review review) {
+        reviewsService.createOrUpdateReview(review);
+        return review;
     }
 
     /**
      * @return Reviews that has been created by the request.
      */
-    @POST
-    @Consumes("application/json")
+    @PUT
+    @Path("/ratings")
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Reviews postReviews(Reviews reviews) {
-        List<ReviewEntity> reviewEntities = new ArrayList<>();
-        for (Review review : reviews.getReviews()) {
-            ReviewEntity entity = new ReviewEntity();
-            entity.setProductId(reviews.getId());
-            entity.setReviewer(review.getReviewer());
-            entity.setText(review.getText());
-            entity.setStars(review.getRating().getStars());
-            reviewEntities.add(entity);
-        }
-
-        reviewsService.addReviews(reviewEntities);
-        return reviews;
+    public Rating putRating(Rating rating) {
+        reviewsService.createOrUpdateRating(rating);
+        return rating;
     }
 
+    /**
+     * @return health check signal
+     */
+    @GET
+    @Path("/healthz")
+    public String healthz() {
+        return "I'm working";
+    }
 }

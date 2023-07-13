@@ -4,29 +4,22 @@ import jakarta.json.bind.annotation.JsonbCreator;
 import jakarta.json.bind.annotation.JsonbProperty;
 
 public class Review {
+    private int id;
     private String reviewer;
     private String text;
-    private Rating rating;
-
-    public Review(
-            @JsonbProperty("reviewer") String reviewer,
-            @JsonbProperty("text") String text) {
-        this.reviewer = reviewer;
-        this.text = text;
-    }
 
     @JsonbCreator
     public Review(
+            @JsonbProperty("id") int id,
             @JsonbProperty("reviewer") String reviewer,
-            @JsonbProperty("text") String text,
-            @JsonbProperty("rating") Rating rating) {
+            @JsonbProperty("text") String text) {
+        this.id = id;
         this.reviewer = reviewer;
         this.text = text;
-        this.rating = rating;
     }
 
-    public Rating getRating() {
-        return rating;
+    public int getId() {
+        return id;
     }
 
     public String getReviewer() {
