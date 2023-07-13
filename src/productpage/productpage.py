@@ -385,7 +385,7 @@ def getProductReviews(product_id, headers):
     # TODO: Figure out how to achieve the same effect using Envoy retries/timeouts
     for _ in range(2):
         try:
-            url = reviews['name'] + "/" + reviews['endpoint'] + "?product-id=" + str(product_id)
+            url = reviews['name'] + "/" + reviews['endpoint'] + "?productId=" + str(product_id)
             res = requests.get(url, headers=headers, timeout=3.0)
         except BaseException:
             res = None
@@ -397,7 +397,7 @@ def getProductReviews(product_id, headers):
 
 def getProductRatings(product_id, headers):
     try:
-        url = ratings['name'] + "/" + ratings['endpoint'] + "?product-id=" + str(product_id)
+        url = ratings['name'] + "/" + ratings['endpoint'] + "?productId=" + str(product_id)
         res = requests.get(url, headers=headers, timeout=3.0)
     except BaseException:
         res = None
