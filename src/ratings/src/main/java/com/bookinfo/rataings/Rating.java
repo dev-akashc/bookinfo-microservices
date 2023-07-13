@@ -3,13 +3,19 @@ package com.bookinfo.rataings;
 import com.fasterxml.jackson.annotation.JsonCreator;
 
 public class Rating {
+    private int productId;
     private String reviewer;
     private int stars;
 
     @JsonCreator
-    public Rating(String reviewer, int stars) {
+    public Rating(int productId, String reviewer, int stars) {
+        this.productId = productId;
         this.reviewer = reviewer;
         this.stars = stars;
+    }
+
+    public int getProductId() {
+        return productId;
     }
 
     public String getReviewer() {

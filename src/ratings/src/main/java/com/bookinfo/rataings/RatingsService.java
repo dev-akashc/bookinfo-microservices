@@ -2,10 +2,14 @@ package com.bookinfo.rataings;
 
 import jakarta.enterprise.context.ApplicationScoped;
 
+import java.util.List;
+
 @ApplicationScoped
 public interface RatingsService {
 
-    public Ratings getByProductId(int productId);
+    public List<Rating> getByProductId(int productId);
 
-    public void add(Ratings ratings);
+    public void createOrUpdate(Rating rating);
+
+    public void delete(Rating rating);
 }
