@@ -21,7 +21,8 @@ public class ReviewsServiceImpl implements ReviewsService {
     private EntityManager em;
 
     public ReviewsServiceImpl() {
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("ReviewsService");
+        EntityManagerFactory emf =
+            Persistence.createEntityManagerFactory("ReviewsService");
         this.em = emf.createEntityManager();
     }
 
