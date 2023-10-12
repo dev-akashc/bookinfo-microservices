@@ -6,6 +6,7 @@
   <groupId>org.bookinfo.ratings</groupId>
   <artifactId>ratings</artifactId>
   <version>1.0.0</version>
+
   <properties>
     <compiler-plugin.version>3.11.0</compiler-plugin.version>
     <maven.compiler.release>17</maven.compiler.release>
