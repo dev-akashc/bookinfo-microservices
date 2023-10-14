@@ -15,34 +15,34 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: reviews-proxy
+  name: strangler-proxy
   namespace: bookinfo
   labels:
-    app: reviews-proxy
+    app: strangler-proxy
 spec:
   ports:
   - name: http
     port: 9080
     targetPort: 10000
   selector:
-    app: reviews-proxy
+    app: strangler-proxy
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: reviews-proxy
+  name: strangler-proxy
   namespace: bookinfo
   labels:
-    app: reviews-proxy
+    app: strangler-proxy
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: reviews-proxy
+      app: strangler-proxy
   template:
     metadata:
       labels:
-        app: reviews-proxy
+        app: strangler-proxy
     spec:
       containers:
       - name: envoy
@@ -62,7 +62,7 @@ spec:
       volumes:
       - name: envoy-config 
         configMap:
-          name: reviews-proxy
+          name: strangler-proxy
           items:
           - key: envoy-custom.yaml
             path: ./envoy-custom.yaml
@@ -70,10 +70,10 @@ spec:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: reviews-proxy
+  name: strangler-proxy
   namespace: bookinfo
   labels:
-    app: reviews-proxy
+    app: strangler-proxy
 data:
   envoy-custom.yaml: |
     static_resources:
