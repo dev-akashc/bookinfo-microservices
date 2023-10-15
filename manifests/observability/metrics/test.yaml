@@ -1,0 +1,77 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: monitoring-sample
+  namespace: bookinfo
+  labels:
+    app: monitoring-sample
+spec:
+  selector:
+    matchLabels:
+      app: monitoring-sample
+  endpoints:
+  - port: web
+    path: /metrics
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: monitoring-sample
+  namespace: bookinfo
+  labels:
+    app: monitoring-sample
+spec:
+  selector:
+    app: monitoring-sample
+  ports:
+  - name: web
+    port: 80
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: monitoring-sample
+  namespace: bookinfo
+  labels:
+    app: monitoring-sample
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - name: monitoring-sample
+      mountPath: /etc/nginx
+      readOnly: true
+  volumes:
+  - name: monitoring-sample
+    configMap:
+      name: monitoring-sample
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: monitoring-sample
+  namespace: bookinfo
+  labels:
+    app: monitoring-sample
+data:
+  nginx.conf: |
+    events {
+        worker_connections  64;
+    }
+    http {
+        server {
+            listen 80;
+            root /usr/share/nginx/html;
+            index index.html index.htm;
+            location /metrics {
+                default_type text/plan;
+                return 200 '# HELP monitoring_sample_probing_signal
+    # TYPE monitoring_sample_probing_signal gauge
+    monitoring_sample_probing_signal 100
+    ';
+            }
+        }
+    }

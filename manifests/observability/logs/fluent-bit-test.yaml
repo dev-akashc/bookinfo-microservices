@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fluent-bit-test
+  namespace: default
+  labels:
+    app: fluent-bit-test
+spec:
+  containers:
+  - name: ubuntu
+    image: ubuntu:latest
+    command: ["/bin/sh", "-c"]
+    args:
+      - |
+        echo '{"key": "value"}'
+  restartPolicy: Never
