@@ -46,7 +46,7 @@ spec:
     spec:
       containers:
       - name: ratings
-        image: registry.gitlab.com/cloudnative_impress/bookinfo-microservices/ratings:chap05
+        image: registry.gitlab.com/cloudnative_impress/bookinfo-microservices/ratings:latest
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
