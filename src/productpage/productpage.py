@@ -428,4 +428,4 @@ if __name__ == '__main__':
     logging.info("start at port %s" % (p))
     # Python does not work on an IPv6 only host
     # https://bugs.python.org/issue10414
-    app.run(host='0.0.0.0', port=p, debug=True, threaded=True)
+    app.run(host='0.0.0.0', port=p, threaded=True)
