@@ -1,7 +1,7 @@
 apiVersion: v1
 data:
-  cluster.name: sandbox 
-  logs.region: ap-northeast-1
+  cluster.name: {{cluster_name}}
+  logs.region: {{region_name}}
   http.server: "Off"
   http.port: ""
   read.head: "Off"
