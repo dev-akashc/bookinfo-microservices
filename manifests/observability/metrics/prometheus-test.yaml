@@ -1,14 +1,14 @@
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: monitoring-sample
+  name: prometheus-test
   namespace: bookinfo
   labels:
-    app: monitoring-sample
+    app: prometheus-test
 spec:
   selector:
     matchLabels:
-      app: monitoring-sample
+      app: prometheus-test
   endpoints:
   - port: web
     path: /metrics
@@ -16,13 +16,13 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: monitoring-sample
+  name: prometheus-test
   namespace: bookinfo
   labels:
-    app: monitoring-sample
+    app: prometheus-test
 spec:
   selector:
-    app: monitoring-sample
+    app: prometheus-test
   ports:
   - name: web
     port: 80
@@ -30,10 +30,10 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: monitoring-sample
+  name: prometheus-test
   namespace: bookinfo
   labels:
-    app: monitoring-sample
+    app: prometheus-test
 spec:
   containers:
   - image: nginx
@@ -41,21 +41,21 @@ spec:
     ports:
     - containerPort: 80
     volumeMounts:
-    - name: monitoring-sample
+    - name: prometheus-test
       mountPath: /etc/nginx
       readOnly: true
   volumes:
-  - name: monitoring-sample
+  - name: prometheus-test
     configMap:
-      name: monitoring-sample
+      name: prometheus-test
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: monitoring-sample
+  name: prometheus-test
   namespace: bookinfo
   labels:
-    app: monitoring-sample
+    app: prometheus-test
 data:
   nginx.conf: |
     events {
