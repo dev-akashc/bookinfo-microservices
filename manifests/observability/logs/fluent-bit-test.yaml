@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: fluent-bit-test
-  namespace: default
+  namespace: bookinfo
   labels:
     app: fluent-bit-test
 spec:
