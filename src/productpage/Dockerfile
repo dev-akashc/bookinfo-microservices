@@ -1,4 +1,4 @@
-# Copyright Istio Authors
+# Copyright 2023 hhiroshell@gmail.com
 #
 #   Licensed under the Apache License, Version 2.0 (the "License");
 #   you may not use this file except in compliance with the License.
@@ -14,11 +14,11 @@
 
 FROM python:3.7.7-slim
 
-COPY requirements.txt ./
-RUN pip install --no-cache-dir -r requirements.txt
+RUN apt update && apt install -y python3-dev build-essential
 
-COPY test-requirements.txt ./
-RUN pip install --no-cache-dir -r test-requirements.txt
+COPY requirements.txt ./
+RUN pip install --no-cache-dir -r requirements.txt && \
+    opentelemetry-bootstrap -a install
 
 COPY productpage.py /opt/microservices/
 COPY tests/unit/* /opt/microservices/
@@ -29,8 +29,8 @@ COPY requirements.txt /opt/microservices/
 ARG flood_factor
 ENV FLOOD_FACTOR ${flood_factor:-0}
 
-EXPOSE 9080
 WORKDIR /opt/microservices
-RUN python -m unittest discover
 
-CMD ["python", "productpage.py", "9080"]
+EXPOSE 9080
+
+CMD ["opentelemetry-instrument", "python", "productpage.py", "9080"]

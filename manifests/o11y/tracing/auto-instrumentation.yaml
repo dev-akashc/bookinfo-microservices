@@ -5,9 +5,7 @@ metadata:
   namespace: tracing
 spec:
   exporter:
-    # endpoint: http://otel-collector-collector.tracing:4317
-    # http/protobuf
-    endpoint: http://otel-collector-collector.tracing:4318
+    endpoint: http://otel-collector-collector.tracing:4317
   propagators:
   - tracecontext
   - baggage
@@ -16,13 +14,7 @@ spec:
     argument: '1'
   java:
     env:
-    # - name: OTEL_INSTRUMENTATION_KAFKA_ENABLED
-    #   value: "false"
-    # - name: OTEL_INSTRUMENTATION_REDISCALA_ENABLED
-    #   value: "false"
-    - name: OTEL_EXPORTER_OTLP_TRACES_PROTOCOL
-      value: "http/protobuf"
-  python:
-    env: 
-    - name: OTEL_EXPORTER_OTLP_TRACES_PROTOCOL
-      value: "http/protobuf"
+    - name: OTEL_INSTRUMENTATION_KAFKA_ENABLED
+      value: "false"
+    - name: OTEL_INSTRUMENTATION_REDISCALA_ENABLED
+      value: "false"
