@@ -66,12 +66,4 @@ public class Endpoints {
         return rating;
     }
 
-    /**
-     * @return health check signal
-     */
-    @GET
-    @Path("/healthz")
-    public String healthz() {
-        return "I'm working";
-    }
 }
