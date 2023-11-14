@@ -102,17 +102,13 @@ data:
                             action:
                               name: route_ratings
                               typed_config:
-                                "@type": type.googleapis.com/envoy.config.route.v3.RouteList
-                                routes:
-                                - match:
-                                    prefix: "/reviews/ratings"
-                                    headers:
-                                    - name: :method
-                                      exact_match: GET
-                                  route:
-                                    prefix_rewrite: "/ratings"
-                                    host_rewrite_literal: ratings
-                                    cluster: ratings
+                                "@type": type.googleapis.com/envoy.config.route.v3.Route
+                                match:
+                                  prefix: "/reviews/ratings"
+                                route:
+                                  prefix_rewrite: "/ratings"
+                                  host_rewrite_literal: ratings
+                                  cluster: ratings
                           "/":
                             action:
                               name: route_reviews
