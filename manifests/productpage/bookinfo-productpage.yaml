@@ -50,6 +50,8 @@ spec:
         ports:
         - containerPort: 9080
         env:
+        - name: REVIEWS_HOSTNAME
+          value: reviews
         - name: OTEL_TRACES_EXPORTER
           value: otlp
         - name: OTEL_EXPORTER_OTLP_ENDPOINT
