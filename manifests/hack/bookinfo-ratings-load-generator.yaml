@@ -50,7 +50,7 @@ spec:
       volumes:
       - name: locustfile
         configMap:
-          name: locustfile
+          name: ratings-load-generator
           items:
           - key: locustfile.py
             path: locustfile.py
