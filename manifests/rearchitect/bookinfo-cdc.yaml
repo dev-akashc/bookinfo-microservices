@@ -76,8 +76,13 @@ data:
       echo "[$(date +'%Y-%m-%dT%H:%M:%S%z')]: $*" >&2
     }
 
-    mysql -h"${REVIEWS_DB_HOST}" -u"${REVIEWS_DB_USER}" -p"${REVIEWS_DB_PASSWORD}" reviews \
-        -e'SELECT JSON_OBJECT("id", product_id, "reviewer", reviewer, "stars", stars) from reviews;' \
+    mysql reviews \
+        -h"${REVIEWS_DB_HOST}" \
+        -u"${REVIEWS_DB_USER}" \
+        -p"${REVIEWS_DB_PASSWORD}" \
+        -e'SELECT JSON_OBJECT ( \
+            "id", product_id, "reviewer", reviewer, "stars", stars \
+          ) FROM reviews;' \
         -s -N \
         > ./ratings.json 2> /dev/null
 
