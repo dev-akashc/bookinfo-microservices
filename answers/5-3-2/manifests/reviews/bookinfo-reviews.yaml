@@ -51,7 +51,7 @@ spec:
     spec:
       containers:
       - name: reviews
-        image: registry.gitlab.com/hhiroshell/bookinfo-microservices/reviews:chap05
+        image: registry.gitlab.com/myaccount/bookinfo-microservices/reviews:chap05
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
