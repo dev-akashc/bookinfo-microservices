@@ -106,7 +106,7 @@ public class ReviewsServiceImpl implements ReviewsService {
         } else {
             entity = entities.get(0);
             entity.setStars(rating.getStars());
-           
+
         }
     }
 }
