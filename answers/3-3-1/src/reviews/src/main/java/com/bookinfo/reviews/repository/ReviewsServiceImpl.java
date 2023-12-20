@@ -36,14 +36,14 @@ public class ReviewsServiceImpl implements ReviewsService {
             }
         }
         EntityManagerFactory emf =
-            Persistence.createEntityManagerFactory("ReviewsService", configOverrides);
+                Persistence.createEntityManagerFactory("ReviewsService", configOverrides);
 
         this.em = emf.createEntityManager();
     }
 
     @Override
     public List<Review> findReviews(int productId) {
-        List<ReviewEntity> entities = em.createNamedQuery("findReivewEntitiesByProductId", ReviewEntity.class)
+        List<ReviewEntity> entities = em.createNamedQuery("findReviewEntitiesByProductId", ReviewEntity.class)
                 .setParameter("productId", productId)
                 .getResultList();
 
@@ -56,7 +56,7 @@ public class ReviewsServiceImpl implements ReviewsService {
 
     @Override
     public List<Rating> findRatings(int productId) {
-        List<ReviewEntity> entities = em.createNamedQuery("findReivewEntitiesByProductId", ReviewEntity.class)
+        List<ReviewEntity> entities = em.createNamedQuery("findReviewEntitiesByProductId", ReviewEntity.class)
                 .setParameter("productId", productId)
                 .getResultList();
 
@@ -69,48 +69,44 @@ public class ReviewsServiceImpl implements ReviewsService {
 
     @Override
     public void createOrUpdateReview(Review review) {
-        List<ReviewEntity> entities = em.createNamedQuery("findReivewEntityByProductIdAndReviewer", ReviewEntity.class)
+        List<ReviewEntity> entities = em.createNamedQuery("findReviewEntityByProductIdAndReviewer", ReviewEntity.class)
                 .setParameter("productId", review.getId())
                 .setParameter("reviewer", review.getReviewer())
                 .getResultList();
 
         ReviewEntity entity = null;
-        if (entities.size() == 0) {
-            entity = new ReviewEntity();    
+        if (entities.isEmpty()) {
+            entity = new ReviewEntity();
             entity.setProductId(review.getId());
             entity.setReviewer(review.getReviewer());
             entity.setText(review.getText());
             entity.setStars(-1);
+            em.persist(entity);
         } else {
             entity = entities.get(0);
             entity.setText(review.getText());
+            // No explicit persist/merge needed for managed entity within transaction
         }
-
-        em.getTransaction().begin();
-        em.persist(entity);
-        em.getTransaction().commit();
     }
 
     @Override
     public void createOrUpdateRating(Rating rating) {
-        List<ReviewEntity> entities = em.createNamedQuery("findReivewEntityByProductIdAndReviewer", ReviewEntity.class)
+        List<ReviewEntity> entities = em.createNamedQuery("findReviewEntityByProductIdAndReviewer", ReviewEntity.class)
                 .setParameter("productId", rating.getId())
                 .setParameter("reviewer", rating.getReviewer())
                 .getResultList();
 
         ReviewEntity entity = null;
-        if (entities.size() == 0) {
-            entity = new ReviewEntity();    
+        if (entities.isEmpty()) {
+            entity = new ReviewEntity();
             entity.setProductId(rating.getId());
             entity.setReviewer(rating.getReviewer());
             entity.setStars(rating.getStars());
+            em.persist(entity);
         } else {
             entity = entities.get(0);
             entity.setStars(rating.getStars());
+           
         }
-
-        em.getTransaction().begin();
-        em.persist(entity);
-        em.getTransaction().commit();
     }
 }
