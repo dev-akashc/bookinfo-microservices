@@ -9,6 +9,7 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.inject.Inject; // Added for CDI injection
 
 import java.util.List;
 
@@ -18,11 +19,11 @@ import java.util.List;
 @Path("/")
 public class Endpoints {
 
+    @Inject // Use CDI to inject the service
     private ReviewsService reviewsService;
 
-    public Endpoints() {
-        this.reviewsService = new ReviewsServiceImpl();
-    }
+    // Remove the constructor for manual instantiation,
+    // CDI handles it automatically with @Inject.
 
     /**
      * @return Reviews that will be returned as a application/json response.
@@ -42,7 +43,7 @@ public class Endpoints {
     public List<Rating> getRatings(@QueryParam("productId") int productId) {
         return reviewsService.findRatings(productId);
     }
-    
+
     /**
      * @return Reviews that has been created by the request.
      */
